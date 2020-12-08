@@ -1,17 +1,17 @@
-//  ______   __                      __                                  
-// /      \ |  \                    |  \                                 
-//|  $$$$$$\| $$  _______  ______  _| $$_     ______   ______   ________ 
+//  ______   __                      __
+// /      \ |  \                    |  \
+//|  $$$$$$\| $$  _______  ______  _| $$_     ______   ______   ________
 //| $$__| $$| $$ /       \|      \|   $$ \   /      \ |      \ |        \
 //| $$    $$| $$|  $$$$$$$ \$$$$$$\\$$$$$$  |  $$$$$$\ \$$$$$$\ \$$$$$$$$
-//| $$$$$$$$| $$| $$      /      $$ | $$ __ | $$   \$$/      $$  /    $$ 
-//| $$  | $$| $$| $$_____|  $$$$$$$ | $$|  \| $$     |  $$$$$$$ /  $$$$_ 
+//| $$$$$$$$| $$| $$      /      $$ | $$ __ | $$   \$$/      $$  /    $$
+//| $$  | $$| $$| $$_____|  $$$$$$$ | $$|  \| $$     |  $$$$$$$ /  $$$$_
 //| $$  | $$| $$ \$$     \\$$    $$  \$$  $$| $$      \$$    $$|  $$    \
 // \$$   \$$ \$$  \$$$$$$$ \$$$$$$$   \$$$$  \$$       \$$$$$$$ \$$$$$$$$
-//=======================================================================                                                                      
+//=======================================================================
 //● Crée par GalackQSM#0895 le 09 novembre 2020
 //● Serveur Discord: https://discord.gg/HPtTfqDdMr
-//● Github: https://github.com/GalackQSM/Alcatraz                                                      
-//=======================================================================                                                                      
+//● Github: https://github.com/GalackQSM/Alcatraz
+//=======================================================================
 
 const { MessageEmbed } = require('discord.js');
 const schedule = require('node-schedule');
@@ -39,9 +39,9 @@ function trimArray(arr, maxLen = 10) {
 }
 function trimStringFromArray(arr, maxLen = 2048, joinChar = '\n') {
   let string = arr.join(joinChar);
-  const diff = maxLen - 15; 
+  const diff = maxLen - 15;
   if (string.length > maxLen) {
-    string = string.slice(0, string.length - (string.length - diff)); 
+    string = string.slice(0, string.length - (string.length - diff));
     string = string.slice(0, string.lastIndexOf(joinChar));
     string = string + `\nEt **${arr.length - string.split('\n').length}** autres...`;
   }
@@ -51,8 +51,7 @@ function trimStringFromArray(arr, maxLen = 2048, joinChar = '\n') {
 function getRange(arr, current, interval) {
   const max = (arr.length > current + interval) ? current + interval : arr.length;
   current = current + 1;
-  const range = (arr.length == 1 || arr.length == current || interval == 1) ? `[${current}]` : `[${current} - ${max}]`;
-  return range;
+  return (arr.length === 1 || arr.length === current || interval === 1) ? `[${current}]` : `[${current} - ${max}]`;
 }
 
 function getOrdinalNumeral(number) {
@@ -65,15 +64,15 @@ function getOrdinalNumeral(number) {
 }
 
 async function getCaseNumber(client, guild, modLog) {
-  
+
   const message = (await modLog.messages.fetch({ limit: 100 })).filter(m => m.member === guild.me &&
     m.embeds[0] &&
-    m.embeds[0].type == 'rich' &&
+    m.embeds[0].type === 'rich' &&
     m.embeds[0].footer &&
     m.embeds[0].footer.text &&
     m.embeds[0].footer.text.startsWith('Case')
   ).first();
-  
+
   if (message) {
     const footer = message.embeds[0].footer.text;
     const num = parseInt(footer.split('#').pop());
@@ -112,13 +111,13 @@ function replaceCrownKeywords(message) {
 async function transferCrown(client, guild, crownRoleId) {
 
   const crownRole = guild.roles.cache.get(crownRoleId);
-  
+
   if (!crownRole) {
     return client.sendSystemErrorMessage(guild, 'mise à jour de la couronne', stripIndent`
       Impossible de transférer le rôle de couronne, il a peut-être été modifié ou supprimé
     `);
   }
-  
+
   const leaderboard = client.db.users.selectLeaderboard.all(guild.id);
   const winner = guild.members.cache.get(leaderboard[0].user_id);
   const points = client.db.users.selectPoints.pluck().get(winner.id, guild.id);
@@ -131,11 +130,11 @@ async function transferCrown(client, guild, crownRoleId) {
       } catch (err) {
 
         quit = true;
-        
+
         return client.sendSystemErrorMessage(guild, 'mise à jour de la couronne', stripIndent`
           Impossible de transférer le rôle de couronne, veuillez vérifier la hiérarchie des rôles et vous assurer que j'ai l'autorisation Gérer les rôles
         `, err.message);
-      } 
+      }
     }
   }));
 
@@ -149,8 +148,8 @@ async function transferCrown(client, guild, crownRoleId) {
       Impossible de transférer le rôle de couronne, veuillez vérifier la hiérarchie des rôles et vous assurer que j'ai l'autorisation Gérer les rôles
     `, err.message);
   }
-  
-  let { crown_channel_id: crownChannelId, crown_message: crownMessage } = 
+
+  let { crown_channel_id: crownChannelId, crown_message: crownMessage } =
     client.db.settings.selectCrown.get(guild.id);
   const crownChannel = guild.channels.cache.get(crownChannelId);
 
@@ -161,11 +160,11 @@ async function transferCrown(client, guild, crownRoleId) {
     crownMessage
   ) {
     crownMessage = crownMessage
-      .replace(/`?\?member`?/g, winner) 
-      .replace(/`?\?username`?/g, winner.user.username) 
-      .replace(/`?\?tag`?/g, winner.user.tag) 
-      .replace(/`?\?role`?/g, crownRole) 
-      .replace(/`?\?points`?/g, points); 
+      .replace(/`?\?member`?/g, winner)
+      .replace(/`?\?username`?/g, winner.user.username)
+      .replace(/`?\?tag`?/g, winner.user.tag)
+      .replace(/`?\?role`?/g, crownRole)
+      .replace(/`?\?points`?/g, points);
     crownChannel.send(new MessageEmbed().setDescription(crownMessage).setColor(guild.me.displayHexColor));
   }
 
@@ -178,8 +177,8 @@ function scheduleCrown(client, guild) {
   const { crown_role_id: crownRoleId, crown_schedule: cron } = client.db.settings.selectCrown.get(guild.id);
 
   if (crownRoleId && cron) {
-    guild.job = schedule.scheduleJob(cron, () => {
-      client.utils.transferCrown(client, guild, crownRoleId);
+    guild.job = schedule.scheduleJob(cron, async () => {
+      await client.utils.transferCrown(client, guild, crownRoleId);
     });
     client.logger.info(`${guild.name}: Tâche planifiée avec succès`);
   }

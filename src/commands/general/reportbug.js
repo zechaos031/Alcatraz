@@ -56,7 +56,7 @@ module.exports = class ReportBugCommand extends Command {
       .setThumbnail(message.guild.iconURL({ dynamic: true }))
       .setDescription(oneLine`
         Rapport de bogue envoyé avec succès!
-        Veuillez rejoindre le serveur [${config.NomServeur}](${config.Support}) pour discuter davantage de votre problème.
+        Veuillez rejoindre le serveur [Alcatraz Empire](https://discord.gg/HPtTfqDdMr) pour discuter davantage de votre problème.
         De plus, n'hésitez pas à soumettre un problème sur [GitHub](https://github.com/GalackQSM/Alcatraz/issues).
       `) 
       .addField('Membre', message.member, true)

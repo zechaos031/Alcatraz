@@ -1,33 +1,32 @@
-//  ______   __                      __                                  
-// /      \ |  \                    |  \                                 
-//|  $$$$$$\| $$  _______  ______  _| $$_     ______   ______   ________ 
+//  ______   __                      __
+// /      \ |  \                    |  \
+//|  $$$$$$\| $$  _______  ______  _| $$_     ______   ______   ________
 //| $$__| $$| $$ /       \|      \|   $$ \   /      \ |      \ |        \
 //| $$    $$| $$|  $$$$$$$ \$$$$$$\\$$$$$$  |  $$$$$$\ \$$$$$$\ \$$$$$$$$
-//| $$$$$$$$| $$| $$      /      $$ | $$ __ | $$   \$$/      $$  /    $$ 
-//| $$  | $$| $$| $$_____|  $$$$$$$ | $$|  \| $$     |  $$$$$$$ /  $$$$_ 
+//| $$$$$$$$| $$| $$      /      $$ | $$ __ | $$   \$$/      $$  /    $$
+//| $$  | $$| $$| $$_____|  $$$$$$$ | $$|  \| $$     |  $$$$$$$ /  $$$$_
 //| $$  | $$| $$ \$$     \\$$    $$  \$$  $$| $$      \$$    $$|  $$    \
 // \$$   \$$ \$$  \$$$$$$$ \$$$$$$$   \$$$$  \$$       \$$$$$$$ \$$$$$$$$
-//=======================================================================                                                                      
+//=======================================================================
 //● Crée par GalackQSM#0895 le 09 novembre 2020
 //● Serveur Discord: https://discord.gg/HPtTfqDdMr
-//● Github: https://github.com/GalackQSM/Alcatraz                                                  
-//=======================================================================                                                                      
-                                                                       
+//● Github: https://github.com/GalackQSM/Alcatraz
+//=======================================================================
+
 const Database = require('better-sqlite3');
 const db = new Database(__basedir + '/data/db.sqlite');
 
 db.pragma('synchronous = 1');
 db.pragma('journal_mode = wal');
 
-db.prepare(`
-  CREATE TABLE IF NOT EXISTS settings (
+db.prepare(` CREATE TABLE IF NOT EXISTS settings (
     guild_id TEXT PRIMARY KEY,
     guild_name TEXT,
     prefix TEXT DEFAULT "*" NOT NULL,
     system_channel_id TEXT,
     starboard_channel_id TEXT,
     admin_role_id TEXT,
-    mod_role_id TEXT,
+    mod_role_id TEXT, 
     mute_role_id TEXT,
     auto_role_id TEXT,
     auto_kick INTEGER,

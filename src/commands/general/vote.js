@@ -23,7 +23,7 @@ module.exports = class VoteCommand extends Command {
         super(client, {
             name: 'vote',
             usage: 'vote',
-            description: 'Votez pour Alcatraz sur les site de bot liste.',
+            description: 'Votez pour Alcatraz sur Top.gg.',
             type: client.types.GENERAL,
               })
     }
@@ -31,7 +31,7 @@ module.exports = class VoteCommand extends Command {
     run(message, args) {
         const embed = new MessageEmbed()
             .setTitle(""+message.author.username+" voici le lien pour voter ")
-            .setDescription("Vote pour "+config.NomBot+" sur [Top.gg](https://top.gg/bot/"+config.BotID+"/vote)\nVote pour "+config.NomBot+" sur [Infinity Bot List](https://infinitybotlist.com/bots/"+config.BotID+"/vote)\nVote pour "+config.NomBot+" sur [Discord Boats](https://discord.boats/bot/"+config.BotID+"/vote)\nVote pour "+config.NomBot+" sur [VoidBots](https://voidbots.net/bot/"+config.BotID+"/vote)\nVote pour "+config.NomBot+" sur [Bots For Discord](https://botsfordiscord.com/bot/"+config.BotID+"/vote)")
+            .setDescription("Vote pour Alcatraz sur [Top.gg](https://top.gg/bot/774652242787041310/vote)\nVote pour Alcatraz sur [Infinity Bot List](https://infinitybotlist.com/bots/774652242787041310/vote)")
             .setImage("https://i.imgur.com/XdibCd4.png")
             .setFooter(config.footer)
             .setTimestamp()

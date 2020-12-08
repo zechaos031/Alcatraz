@@ -15,7 +15,6 @@
 
 const Command = require('../Alcatraz.js');
 const { MessageEmbed } = require('discord.js');
-const config = require('../../../config.json');
 
 const rgx = /^(?:<@!?)?(\d+)>?$/;
 
@@ -40,7 +39,7 @@ module.exports = class LeaveGuildCommand extends Command {
     const embed = new MessageEmbed()
       .setTitle('J\'ai bien quitté le serveur de force')
       .setDescription(`J'ai quitté avec succès le serveur **${guild.name}**.`)
-      .setFooter(config.footer)
+      .setFooter("© 2020 - Alcatraz | Projet open-source")
       .setTimestamp()
       .setColor("#2f3136");
     message.channel.send(embed);

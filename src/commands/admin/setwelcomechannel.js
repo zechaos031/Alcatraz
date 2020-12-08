@@ -47,7 +47,7 @@ module.exports = class SetWelcomeChannelCommand extends Command {
     }
     
     const embed = new MessageEmbed()
-      .setTitle('Paramètres: `Messages de bienvenue`')
+      .setTitle('Paramètres: `Welcome Messages`')
       .setDescription(`Le \`salon de bienvenue\` a été mis à jour avec succès. ${success}`)
       .addField('Message', welcomeMessage || '`Aucun`')
       .setThumbnail(message.guild.iconURL({ dynamic: true }))

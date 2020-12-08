@@ -37,7 +37,7 @@ module.exports = class GitHubCommand extends Command {
         [Clique ici](https://github.com/GalackQSM/Alcatraz) pour visiter mon référentiel GitHub!
         S'il vous plaît, soutenez-moi en mettant en vedette ⭐ le repo, et n'hésitez pas à commenter des problèmes ou des suggestions!
       `)
-      .addField(`<:alcatraz_liens:776109858197209109> Liens`, `**[Ajouter ${config.NomBot}](https://discordapp.com/oauth2/authorize?client_id=${config.BotID}&scope=bot&permissions=2146958847) | [${config.NomServeur}](${config.Support}) | [Github](https://github.com/GalackQSM/Alcatraz) | [SiteWeb](https://alcatraz-bot.com) | [Dons](https://www.patreon.com/AlcatrazBot) | [Vote](https://top.gg/bot/${config.BotID}/vote)**`)
+      .addField(''+emojis.liens+' Liens', '**[Ajouter Alcatraz](https://discordapp.com/oauth2/authorize?client_id=774652242787041310&scope=bot&permissions=2146958847) | '+'[Alcatraz Empire](https://discord.gg/aGP5kvxFEc) | '+'[Github](https://github.com/GalackQSM/Alcatraz) | '+'[SiteWeb](https://alcatraz-bot.com)**')
       .setFooter(config.footer)
       .setTimestamp()
       .setColor("#2f3136");

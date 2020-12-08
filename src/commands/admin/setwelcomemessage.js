@@ -17,7 +17,6 @@ const Command = require('../Alcatraz.js');
 const { MessageEmbed } = require('discord.js');
 const { success } = require('../../utils/emojis.json');
 const { oneLine } = require('common-tags');
-const config = require('../../../config.json');
 
 module.exports = class SetWelcomeMessageCommand extends Command {
   constructor(client) {
@@ -51,7 +50,7 @@ module.exports = class SetWelcomeMessageCommand extends Command {
       .setThumbnail(message.guild.iconURL({ dynamic: true }))
       .setDescription(`Le \`message de bienvenue\` a été mis à jour avec succès. ${success}`)
       .addField('Salon', welcomeChannel || '`Aucun`', true)
-      .setFooter(config.footer)
+      .setFooter("© 2020 - Alcatraz | Projet open-source")
       .setTimestamp()
       .setColor("#2f3136");
 

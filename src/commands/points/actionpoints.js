@@ -35,7 +35,7 @@ module.exports = class PointPerCommand extends Command {
     const pointsPer = stripIndent`
       Points de message :: ${messagePoints} par message
       Points de commande :: ${commandPoints} par commande
-      Points de vocal   :: ${voicePoints} par minute
+      Points de vaocal   :: ${voicePoints} par minute
     `;
 
     const embed = new MessageEmbed()

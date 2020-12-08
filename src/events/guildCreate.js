@@ -1,20 +1,18 @@
-//  ______   __                      __                                  
-// /      \ |  \                    |  \                                 
-//|  $$$$$$\| $$  _______  ______  _| $$_     ______   ______   ________ 
+//  ______   __                      __
+// /      \ |  \                    |  \
+//|  $$$$$$\| $$  _______  ______  _| $$_     ______   ______   ________
 //| $$__| $$| $$ /       \|      \|   $$ \   /      \ |      \ |        \
 //| $$    $$| $$|  $$$$$$$ \$$$$$$\\$$$$$$  |  $$$$$$\ \$$$$$$\ \$$$$$$$$
-//| $$$$$$$$| $$| $$      /      $$ | $$ __ | $$   \$$/      $$  /    $$ 
-//| $$  | $$| $$| $$_____|  $$$$$$$ | $$|  \| $$     |  $$$$$$$ /  $$$$_ 
+//| $$$$$$$$| $$| $$      /      $$ | $$ __ | $$   \$$/      $$  /    $$
+//| $$  | $$| $$| $$_____|  $$$$$$$ | $$|  \| $$     |  $$$$$$$ /  $$$$_
 //| $$  | $$| $$ \$$     \\$$    $$  \$$  $$| $$      \$$    $$|  $$    \
 // \$$   \$$ \$$  \$$$$$$$ \$$$$$$$   \$$$$  \$$       \$$$$$$$ \$$$$$$$$
-//=======================================================================                                                                      
+//=======================================================================
 //● Crée par GalackQSM#0895 le 09 novembre 2020
 //● Serveur Discord: https://discord.gg/HPtTfqDdMr
-//● Github: https://github.com/GalackQSM/Alcatraz                                                      
-//=======================================================================                                                                      
+//● Github: https://github.com/GalackQSM/Alcatraz
+//=======================================================================
 
-const { MessageEmbed } = require('discord.js');
-const colors = require('../utils/colors.json');
 const { success } = require('../utils/emojis.json');
 
 module.exports = async (client, guild) => {
@@ -22,12 +20,16 @@ module.exports = async (client, guild) => {
   client.logger.info(`Alcatraz viens de rejoindre le serveur: ${guild.name}`);
   const serverLog = client.channels.cache.get(client.serverLogId);
   if (serverLog)
-    serverLog.send(new MessageEmbed().setDescription(`${client.user} viens de rejoindre le serveur: **${guild.name}** ${success}`));
+    serverLog.send({
+      embed:{
+        description:`${client.user} viens de rejoindre le serveur: **${guild.name}** ${success}`
+      }
+    })
 
-  const modLog = guild.channels.cache.find(c => c.name.replace('-', '').replace('s', '') === 'modlog' || 
+  const modLog = guild.channels.cache.find(c => c.name.replace('-', '').replace('s', '') === 'modlog' ||
     c.name.replace('-', '').replace('s', '') === 'moderatorlog');
 
-  const adminRole = 
+  const adminRole =
     guild.roles.cache.find(r => r.name.toLowerCase() === 'admin' || r.name.toLowerCase() === 'administrator');
   const modRole = guild.roles.cache.find(r => r.name.toLowerCase() === 'mod' || r.name.toLowerCase() === 'moderator');
 
@@ -51,18 +53,18 @@ module.exports = async (client, guild) => {
               'SEND_MESSAGES': false,
               'ADD_REACTIONS': false
             });
-          else if (channel.type === 'voice' && channel.editable) 
+          else if (channel.type === 'voice' && channel.editable)
             await channel.updateOverwrite(muteRole, {
               'SPEAK': false,
               'STREAM': false
             });
-        } 
+        }
       } catch (err) {
         client.logger.error(err.stack);
       }
     }
   }
-  
+
   let crownRole = guild.roles.cache.find(r => r.name === 'Meilleur membre');
   if (!crownRole) {
     try {
@@ -80,9 +82,9 @@ module.exports = async (client, guild) => {
   client.db.settings.insertRow.run(
     guild.id,
     guild.name,
-    guild.systemChannelID, 
     guild.systemChannelID,
-    guild.systemChannelID, 
+    guild.systemChannelID,
+    guild.systemChannelID,
     guild.systemChannelID,
     modLog ? modLog.id : null,
     adminRole ? adminRole.id : null,
@@ -93,14 +95,14 @@ module.exports = async (client, guild) => {
 
   guild.members.cache.forEach(member => {
     client.db.users.insertRow.run(
-      member.id, 
-      member.user.username, 
+      member.id,
+      member.user.username,
       member.user.discriminator,
-      guild.id, 
+      guild.id,
       guild.name,
       member.joinedAt.toString(),
       member.bot ? 1 : 0
     );
   });
-  
+
 };

@@ -14,7 +14,7 @@
 //=======================================================================                                                                      
                                                                        
 const Command = require('../Alcatraz.js');
-const MenuReac = require('../../../MenuReac.js');
+const ReactionMenu = require('../ReactionMenu.js');
 const { MessageEmbed } = require('discord.js');
 const { oneLine, stripIndent } = require('common-tags');
 const config = require('../../../config.json');
@@ -89,19 +89,19 @@ module.exports = class HelpCommand extends Command {
       });
 
       const json = new MessageEmbed()
-        .setTitle(`Panel des commandes de ${config.NomBot}`)
+        .setTitle('Panel des commandes de Alcatraz')
         .setDescription(stripIndent`
           **Prefix:** \`${prefix}\`
           **Plus d'information:** \`${prefix}help [commande]\`
           **Nombre de commandes:** \`${message.client.commands.size}\`
         `)
-        .addField(`<:alcatraz_liens:776109858197209109> Liens`, `**[Ajouter ${config.NomBot}](https://discordapp.com/oauth2/authorize?client_id=${config.BotID}&scope=bot&permissions=2146958847) | [${config.NomServeur}](${config.Support}) | [Github](https://github.com/GalackQSM/Alcatraz) | [SiteWeb](https://alcatraz-bot.com) | [Dons](https://www.patreon.com/AlcatrazBot) | [Vote](https://top.gg/bot/${config.BotID}/vote)**`)
+        .addField(`<:alcatraz_liens:776109858197209109> Liens`, '**[Ajouter Alcatraz](https://discordapp.com/oauth2/authorize?client_id=774652242787041310&scope=bot&permissions=2146958847) | '+'[Alcatraz Empire](https://discord.gg/aGP5kvxFEc) | '+'[Github](https://github.com/GalackQSM/Alcatraz) | '+'[SiteWeb](https://alcatraz-bot.com) | '+'[Dons](https://www.patreon.com/AlcatrazBot) | '+'[Vote](https://top.gg/bot/774652242787041310/vote)**')
         .setFooter(config.footer)
         .setTimestamp()
         .setColor("#2f3136");
 
       const embed = new MessageEmbed() 
-        .setTitle(`Commandes de ${config.NomBot}`)
+        .setTitle('Commandes d\'Alcatraz')
         .setThumbnail('')
         .addField(`${emojis[0]} ${capitalize(INFO)}`, `\`${commands[INFO].length}\` commandes`, true)
         .addField(`${emojis[1]} ${capitalize(FUN)}`, `\`${commands[FUN].length}\` commandes`, true)
@@ -115,7 +115,7 @@ module.exports = class HelpCommand extends Command {
         .addField(`${emojis[9]} ${capitalize(MOD)}`, `\`${commands[MOD].length}\` commandes`, true)
         .addField(`${emojis[10]} ${capitalize(ADMIN)}`, `\`${commands[ADMIN].length}\` commandes`, true)
         .addField(`${emojis[11]} ${capitalize(OWNER)}`, `\`${commands[OWNER].length}\` commandes`, true)
-        .addField(`<:alcatraz_liens:776109858197209109> Liens`, `**[Ajouter ${config.NomBot}](https://discordapp.com/oauth2/authorize?client_id=${config.BotID}&scope=bot&permissions=2146958847) | [${config.NomServeur}](${config.Support}) | [Github](https://github.com/GalackQSM/Alcatraz) | [SiteWeb](https://alcatraz-bot.com) | [Dons](https://www.patreon.com/AlcatrazBot) | [Vote](https://top.gg/bot/${config.BotID}/vote)**`)
+        .addField(`<:alcatraz_liens:776109858197209109> Liens`, '**[Ajouter Alcatraz](https://discordapp.com/oauth2/authorize?client_id=774652242787041310&scope=bot&permissions=2146958847) | '+'[Alcatraz Empire](https://discord.gg/aGP5kvxFEc) | '+'[Github](https://github.com/GalackQSM/Alcatraz) | '+'[SiteWeb](https://alcatraz-bot.com) | '+'[Dons](https://www.patreon.com/AlcatrazBot) | '+'[Vote](https://top.gg/bot/774652242787041310/vote)**')
         .setFooter(config.footer)
         .setTimestamp()
         .setImage('https://i.imgur.com/WP9d2Z2.png')
@@ -172,7 +172,7 @@ module.exports = class HelpCommand extends Command {
         }),
       };
 
-      new MenuReac(message.channel, message.member, embed, reactions, 180000);
+      new ReactionMenu(message.channel, message.member, embed, reactions, 180000);
     }
   }
 };

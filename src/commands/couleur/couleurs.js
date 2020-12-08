@@ -14,7 +14,7 @@
 //=======================================================================                                                                      
                                                                        
 const Command = require('../Alcatraz.js');
-const MenuReac = require('../../../MenuReac.js');
+const ReactionMenu = require('../ReactionMenu.js');
 const { MessageEmbed } = require('discord.js');
 const config = require('../../../config.json');
 
@@ -90,7 +90,7 @@ module.exports = class CouleursCommand extends Command {
         '▶️': next,
       };
 
-      new MenuReac(message.channel, message.member, embed, reactions);
+      new ReactionMenu(message.channel, message.member, embed, reactions);
       
     }
   }

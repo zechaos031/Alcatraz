@@ -1,42 +1,46 @@
-//  ______   __                      __                                  
-// /      \ |  \                    |  \                                 
-//|  $$$$$$\| $$  _______  ______  _| $$_     ______   ______   ________ 
+//  ______   __                      __
+// /      \ |  \                    |  \
+//|  $$$$$$\| $$  _______  ______  _| $$_     ______   ______   ________
 //| $$__| $$| $$ /       \|      \|   $$ \   /      \ |      \ |        \
 //| $$    $$| $$|  $$$$$$$ \$$$$$$\\$$$$$$  |  $$$$$$\ \$$$$$$\ \$$$$$$$$
-//| $$$$$$$$| $$| $$      /      $$ | $$ __ | $$   \$$/      $$  /    $$ 
-//| $$  | $$| $$| $$_____|  $$$$$$$ | $$|  \| $$     |  $$$$$$$ /  $$$$_ 
+//| $$$$$$$$| $$| $$      /      $$ | $$ __ | $$   \$$/      $$  /    $$
+//| $$  | $$| $$| $$_____|  $$$$$$$ | $$|  \| $$     |  $$$$$$$ /  $$$$_
 //| $$  | $$| $$ \$$     \\$$    $$  \$$  $$| $$      \$$    $$|  $$    \
 // \$$   \$$ \$$  \$$$$$$$ \$$$$$$$   \$$$$  \$$       \$$$$$$$ \$$$$$$$$
-//=======================================================================                                                                      
+//=======================================================================
 //● Crée par GalackQSM#0895 le 09 novembre 2020
 //● Serveur Discord: https://discord.gg/HPtTfqDdMr
-//● Github: https://github.com/GalackQSM/Alcatraz                                                      
-//=======================================================================                                                                      
-
-const { MessageEmbed } = require('discord.js');
-
+//● Github: https://github.com/GalackQSM/Alcatraz
+//=======================================================================
 module.exports = (client, oldMessage, newMessage) => {
-
+let embed ={}
   if (newMessage.webhookID) return;
 
   if (
-    newMessage.member && 
+    newMessage.member &&
     newMessage.id === newMessage.member.lastMessageID &&
     !oldMessage.command
   ) {
     client.emit('message', newMessage);
   }
 
-  const embed = new MessageEmbed()
-    .setAuthor(`${newMessage.author.tag}`, newMessage.author.displayAvatarURL({ dynamic: true }))
-    .setTimestamp()
-    .setColor(newMessage.guild.me.displayHexColor);
+  Object.assign({
+    embed:{
+      author:{
+        name:newMessage.author.tag,
+        icon_url:newMessage.author.displayAvatarURL({ dynamic: true })
+      },
+      timestamp: new Date(),
+      color:newMessage.guild.me.displayHexColor
+    }
 
-  if (oldMessage.content != newMessage.content) {
+  })
+
+  if (oldMessage.content !== newMessage.content) {
 
     const starboardChannelId = client.db.settings.selectStarboardChannelId.pluck().get(newMessage.guild.id);
     const starboardChannel = newMessage.guild.channels.cache.get(starboardChannelId);
-    if (newMessage.channel == starboardChannel) return;
+    if (newMessage.channel === starboardChannel) return;
 
     const messageEditLogId = client.db.settings.selectMessageEditLogId.pluck().get(newMessage.guild.id);
     const messageEditLog = newMessage.guild.channels.cache.get(messageEditLogId);
@@ -48,14 +52,21 @@ module.exports = (client, oldMessage, newMessage) => {
 
       if (newMessage.content.length > 1024) newMessage.content = newMessage.content.slice(0, 1021) + '...';
       if (oldMessage.content.length > 1024) oldMessage.content = oldMessage.content.slice(0, 1021) + '...';
+      Object.assign({
+        embed:{
+          title:'Mise à jour du message: `Modifier`',
+          description:`Le message de ${newMessage.member} dans ${newMessage.channel} a été modifié. [Voir le message!](${newMessage.url})`,
+          field:[{
+            name:'Avant',
+            value:oldMessage.content
+          },
+            {
+              name:'Après',
+              value:newMessage.content
+            }]
+        }
 
-      embed
-        .setTitle('Mise à jour du message: `Modifier`')
-        .setDescription(`
-          Le message de ${newMessage.member} dans ${newMessage.channel} a été modifié. [Voir le message!](${newMessage.url})
-        `)
-        .addField('Avant', oldMessage.content)
-        .addField('Après', newMessage.content);
+      },embed)
       messageEditLog.send(embed);
     }
   }
@@ -68,12 +79,23 @@ module.exports = (client, oldMessage, newMessage) => {
       messageDeleteLog.viewable &&
       messageDeleteLog.permissionsFor(newMessage.guild.me).has(['SEND_MESSAGES', 'EMBED_LINKS'])
     ) {
-
-      embed.setTitle('Mise à jour du message: `Supprimer`');
+      Object.assign({
+        embed:{
+          title:"Mise à jour du message: `Supprimer`",
+        }
+      },embed)
       if (oldMessage.embeds.length > 1)
-        embed.setDescription(`Le message de ${newMessage.member} dans ${newMessage.channel} ont été supprimés.`);
+        Object.assign({
+          embed:{
+            description:`Le message de ${newMessage.member} dans ${newMessage.channel} ont été supprimés.`,
+          }
+        },embed)
       else
-        embed.setDescription(`Le message de ${newMessage.member} dans ${newMessage.channel} a été supprimée.`);
+        Object.assign({
+          embed:{
+            description:`Le message de ${newMessage.member} dans ${newMessage.channel} a été supprimée.`,
+          }
+        },embed)
       messageDeleteLog.send(embed);
     }
   }

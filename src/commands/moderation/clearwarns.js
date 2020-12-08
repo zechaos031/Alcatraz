@@ -60,6 +60,6 @@ module.exports = class ClearWarnsCommand extends Command {
       ${message.guild.name}: ${message.author.tag} a effacé les avertissements de ${member.user.tag}
     `);
     
-    this.sendModLogMessage(message, reason, { Membre: member, 'Nombre d\'avertissements': '`0`' });
+    this.sendModLogMessage(message, reason, { Member: member, 'Nombre d\'avertissements': '`0`' });
   }
 };

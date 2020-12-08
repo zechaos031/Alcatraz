@@ -51,7 +51,7 @@ module.exports = class WarnCommand extends Command {
     const warning = {
       mod: message.member.id,
       date:  moment().format('DD/MM/YYYY'),
-      Raison: reason
+      reason: reason
     };
 
     warns.warns.push(warning);
@@ -71,7 +71,7 @@ module.exports = class WarnCommand extends Command {
     message.channel.send(embed);
     message.client.logger.info(`${message.guild.name}: ${message.author.tag} a averti ${member.user.tag}`);
     
-    this.sendModLogMessage(message, reason, { Membre: member, 'Nombre d\'avertissement': `\`${warns.warns.length}\`` });
+    this.sendModLogMessage(message, reason, { Member: member, 'Warn Count': `\`${warns.warns.length}\`` });
 
     if (autoKick && warns.warns.length === autoKick) {
       message.client.commands.get('kick')

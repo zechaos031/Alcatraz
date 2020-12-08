@@ -15,7 +15,6 @@
 
 const Command = require('../Alcatraz.js');
 const { MessageEmbed } = require('discord.js');
-const config = require('../../../config.json');
 
 module.exports = class BlastCommand extends Command {
   constructor(client) {
@@ -41,10 +40,10 @@ module.exports = class BlastCommand extends Command {
         systemChannel.permissionsFor(guild.me).has(['SEND_MESSAGES', 'EMBED_LINKS'])
       ) {
         const embed = new MessageEmbed()
-          .setTitle(`Message système ${config.NomBot}`)
+          .setTitle('Message système d\'Alcatraz')
           .setThumbnail(message.guild.iconURL({ dynamic: true }))
           .setDescription(msg)
-          .setFooter(config.footer)
+          .setFooter("© 2020 - Alcatraz | Projet open-source")
           .setTimestamp()
           .setColor("#2f3136");
         systemChannel.send(embed);
@@ -57,7 +56,7 @@ module.exports = class BlastCommand extends Command {
       const embed = new MessageEmbed()
         .setTitle('Échecs du message d\'envoi')
         .setDescription(description)
-        .setFooter(config.footer)
+        .setFooter("© 2020 - Alcatraz | Projet open-source")
         .setTimestamp()
         .setColor("#2f3136");
       message.channel.send(embed);

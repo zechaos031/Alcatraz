@@ -15,7 +15,6 @@
 
 const Command = require('../Alcatraz.js');
   Discord = require("discord.js");
-const config = require('../../../config.json');
 
 class ServersList extends Command {
 
@@ -48,7 +47,7 @@ class ServersList extends Command {
     const embed = new Discord.MessageEmbed()
       .setAuthor(message.author.tag, message.author.displayAvatarURL())
       .setColor("#2f3136")
-      .setFooter(config.footer)
+      .setFooter("© 2020 - Alcatraz | Projet open-source")
       .setTitle(`Page: ${page}/${Math.ceil(this.client.guilds.cache.size/10)}`)
       .setDescription(description);
 

@@ -63,15 +63,15 @@ module.exports = class StatsCommand extends Command {
       **• NodeJS:** ${process.versions.node}
     `;
     const embed = new MessageEmbed()
-      .setTitle(`Statistiques de ${config.NomBot}`)
-      .setDescription(`● **${config.NomBot}** a été créé par **GalackQSM#0895**\n● Merci à [Flaticon](https://flaticon.com/) pour presque tous les emojis!\n● **${config.NomBot}** à été crée le **${utc(message.client.user.createdTimestamp).format('DD/MM/YYYY à HH:mm:ss')}**\n● Source développer par **GalackQSM#0895**!`) //merci de laisser le copyright "● Source développer par **GalackQSM#0895**!"
+      .setTitle('Statistiques d\'Alcatraz')
+      .setDescription(`● **Alcatraz** a été créé par **GalackQSM#0895**\n● Merci à [Flaticon](https://flaticon.com/) pour presque tous les emojis!\n● **Alcatraz** à été crée le **${utc(message.client.user.createdTimestamp).format('DD/MM/YYYY à HH:mm:ss')}**\n● Source développer par **GalackQSM#0895**!`) //merci de laisser le copyright "● Source développer par **GalackQSM#0895**!"
       .addField('Commandes:', `\`${message.client.commands.size}\` commandes`, true)
       .addField('Aliases:', `\`${message.client.aliases.size}\` aliases`, true)
       .addField('Catégories:', `\`${Object.keys(message.client.types).length}\` catégories`, true)
       .addField('__Les donateurs d\'Alcatraz__', `${donateurStats}`)
-      .addField(`__${config.NomBot}__`, `${clientStats}`)
+      .addField('__Alcatraz__', `${clientStats}`)
       .addField('__Serveur__', `${serverStats}`)
-      .addField(`<:alcatraz_liens:776109858197209109> Liens`, `**[Ajouter ${config.NomBot}](https://discordapp.com/oauth2/authorize?client_id=${config.BotID}&scope=bot&permissions=2146958847) | [${config.NomServeur}](${config.Support}) | [Github](https://github.com/GalackQSM/Alcatraz) | [SiteWeb](https://alcatraz-bot.com) | [Dons](https://www.patreon.com/AlcatrazBot) | [Vote](https://top.gg/bot/${config.BotID}/vote)**`)
+      .addField(`<:alcatraz_liens:776109858197209109> Liens`, '**[Ajouter Alcatraz](https://discordapp.com/oauth2/authorize?client_id=774652242787041310&scope=bot&permissions=2146958847) | '+'[Alcatraz Empire](https://discord.gg/aGP5kvxFEc) | '+'[Github](https://github.com/GalackQSM/Alcatraz) | '+'[SiteWeb](https://alcatraz-bot.com) | '+'[Dons](https://www.patreon.com/AlcatrazBot) | '+'[Vote](https://top.gg/bot/774652242787041310/vote)**')
       .setImage('https://i.imgur.com/WP9d2Z2.png')
       .setFooter(config.footer)
       .setTimestamp()

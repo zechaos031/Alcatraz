@@ -38,12 +38,12 @@ module.exports = class RockPaperScissorsCommand extends Command {
     const botChoice = Math.floor(Math.random()*3);
     let result;
     if (userChoice === botChoice) result = 'C\'est un match nul!';
-    else if (botChoice > userChoice || botChoice === 0 && userChoice === 2) result = `**${config.NomBot}** gagne !`;
+    else if (botChoice > userChoice || botChoice === 0 && userChoice === 2) result = '**Alcatraz** gagne !';
     else result = `**${message.member.displayName}** gagne !`;
     const embed = new MessageEmbed()
-      .setTitle(`${message.member.displayName} vs. ${config.NomBot}`)
+      .setTitle(`${message.member.displayName} vs. Alcatraz`)
       .addField('Votre choix:', res[userChoice], true)
-      .addField(`Le choix de ${config.NomBot}`, res[botChoice], true)
+      .addField('Le choix de Alcatraz', res[botChoice], true)
       .addField('Résultat', result, true)
       .setFooter(config.footer)
       .setTimestamp()

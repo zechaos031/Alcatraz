@@ -53,7 +53,7 @@ module.exports = class FeedbackCommand extends Command {
       .setThumbnail(message.guild.iconURL({ dynamic: true }))
       .setDescription(oneLine`
         Commentaires envoyés avec succès!
-        Veuillez rejoindre le serveur [Alcatraz Empire](${config.Support}) pour discuter d'avantage de vos commentaires.
+        Veuillez rejoindre le serveur [Alcatraz Empire](https://discord.gg/HPtTfqDdMr) pour discuter d'avantage de vos commentaires.
       `) 
       .addField('Membre', message.member, true)
       .addField('Message', feedback)

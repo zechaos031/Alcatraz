@@ -17,7 +17,6 @@ const Command = require('../Alcatraz.js');
 const { MessageEmbed } = require('discord.js');
 const { oneLine } = require('common-tags');
 const config = require('../../../config.json');
-const emojis = require('../../utils/emojis.json');
 
 module.exports = class ToggleCommandCommand extends Command {
   constructor(client) {
@@ -53,12 +52,12 @@ module.exports = class ToggleCommandCommand extends Command {
     // Disable command
     if (!disabledCommands.includes(command.name)) {
       disabledCommands.push(command.name); // Add to array if not present
-      description = `La commande \`${command.name}\` est maintenant **non actif**. ${emojis.fail}`;
+      description = `La commande \`${command.name}\` est maintenant **non actif**. <:fail:775004965352898561>`;
     
     // Enable command
     } else {
       message.client.utils.removeElement(disabledCommands, command.name);
-      description = `La commande \`${command.name}\` est maintenant **actif**. ${emojis.verify}`;
+      description = `La commande \`${command.name}\` est maintenant **actif**. <:valider:774806924712476674>`;
     }
 
     message.client.db.settings.updateDisabledCommands.run(disabledCommands.join(' '), message.guild.id);

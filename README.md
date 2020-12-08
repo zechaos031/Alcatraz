@@ -14,6 +14,19 @@
 
 > Ce bot est sous licence et également en open-source.
 
+> CE REPO EST UN REWRITE COMPLET SANS TEST DE ALCATRAZ CAR BEAUCOUP DE CHOSE DANS LE CODE N'ALLEZ PAS DU TOUS
+
+> Repo de base https://github.com/GalackQSM/Alcatraz
+
+## Modification appliqué
+
+- Optimisation du code
+- Optimisation des variable
+- Respect de la norme ES6
+- Optimisation des modules utiliser
+- Simplification du code
+-Baisse de la consommation CPU / RAM / NETWORK
+
 Alcatraz est un bot Discord codé en JavaScript avec [Discord.js](https://discord.js.org) et [sqlite](https://www.sqlite.org) par [GalackQSM](https://github.com/GalackQSM).  
 N'hésitez pas à ajouter une étoile ⭐ au référentiel pour promouvoir le projet!
 ## Informations
@@ -48,11 +61,10 @@ Alcatraz a beaucoup de fonctionnalités, avec **12 catégories principales**:
 * 1- Commencer par télécharger le repo et d'extraire le dossier `alcatraz-master`sur votre bureau.
 * 2- Ouvrez le dossier `alcatraz-master` et crée un dossier `data`.
 * 3- Ouvrez la racine de votre dossier avec CMD
-* 4- Faite la commande `yarn install` [Télécharger Yarn](https://yarnpkg.com/lang/fr/docs/install/).
+* 4- Faite la commande `yarn install` [Télécharger Yarn](https://yarnpkg.com/lang/fr/docs/install/) ou npm `npm i` .
 * 5- Allez dans le fichier `config.json` et le remplir.
-* 6- Après faite dans le CMD `npm start`.
+* 6- Après faite dans le CMD `npm start` pour un hot reload installé nodemon `npm i nodemon -g` puis éxécuté `nodemon Alcatraz`.
 
-* PS: Si vous avez des erreurs d'installation, télécharger [Visual Studio Community](https://visualstudio.microsoft.com/fr/vs/community/) et cocher cette case pendant l'installation [Screen](https://i.imgur.com/KTqnSxo.png) et refaire `npm start` et le tour est jouer ou sinon téléchargez directement le dossier [node_modules ici](https://mega.nz/file/EklzCApS#kcqz9OGHmUlyZyLXVFbyIMohma52Y-YALJr2Y5gRNJM)
 
 * Pensez a activer les Privileged Gateway Intents de votre bot pour qu'il fonctionne [Image ici](https://prnt.sc/vq58ed)
 
@@ -69,5 +81,4 @@ Alcatraz a beaucoup de fonctionnalités, avec **12 catégories principales**:
 *   [Github](https://github.com/GalackQSM/Alcatraz)
 *   [Donation](https://www.patreon.com/AlcatrazBot)
 *   [Avis](https://fr.trustpilot.com/review/alcatraz-bot.com)
-
 

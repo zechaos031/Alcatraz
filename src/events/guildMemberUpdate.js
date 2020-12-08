@@ -1,13 +1,19 @@
 const { MessageEmbed } = require('discord.js');
 
 module.exports = (client, oldMember, newMember) => {
-  
-  const embed = new MessageEmbed()
-    .setAuthor(`${newMember.user.tag}`, newMember.user.displayAvatarURL({ dynamic: true }))
-    .setTimestamp()
-    .setColor(oldMember.guild.me.displayHexColor);
+  let embed ={}
+ Object.assign({
+   embed:{
+     author: {
+       name: member.guild.name,
+       icon_url: member.guild.iconURL({dynamic: true})
+     },
+     timestamp: new Date(),
+     color:oldMember.guild.me.displayHexColor
+   }
+ },embed)
 
-  if (oldMember.nickname != newMember.nickname) {
+  if (oldMember.nickname !== newMember.nickname) {
     const nicknameLogId = client.db.settings.selectNicknameLogId.pluck().get(oldMember.guild.id);
     const nicknameLog = oldMember.guild.channels.cache.get(nicknameLogId);
     if (
@@ -17,10 +23,16 @@ module.exports = (client, oldMember, newMember) => {
     ) {
       const oldNickname = oldMember.nickname || '`Aucun`';
       const newNickname = newMember.nickname || '`Aucun`';
-      embed
-        .setTitle('Mise à jour des membres: `Pseudo`')
-        .setDescription(`${newMember} ton surnom a été modifié.`)
-        .addField('Surnom', `${oldNickname} ➔ ${newNickname}`);
+      Object.assign({
+        embed:{
+          title:"Mise à jour des membres: `Pseudo`",
+          description:`${newMember} ton surnom a été modifié.`,
+          field:[{
+            name:'Surnom',
+            value: `${oldNickname} ➔ ${newNickname}`
+          }]
+        }
+      })
       nicknameLog.send(embed);
     }
   }

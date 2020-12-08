@@ -31,9 +31,9 @@ module.exports = class SupportServerCommand extends Command {
     const embed = new MessageEmbed()
       .setTitle('Serveur d\'assistance')
       .setThumbnail(message.guild.iconURL({ dynamic: true }))
-      .setDescription(`Cliquez [ICI](https://discord.gg/HPtTfqDdMr) pour rejoindre le serveur de support ${config.NomBot}!`)
+      .setDescription('Cliquez [ICI](https://discord.gg/HPtTfqDdMr) pour rejoindre le serveur de support d\'Alcatraz!')
       .addField('Autres Liens', 
-        `**[Invite ${config.NomBot}](https://discordapp.com/oauth2/authorize?client_id=774652242787041310&scope=bot&permissions=2146958847)**`
+        '**[Invite Alcatraz](https://discordapp.com/oauth2/authorize?client_id=774652242787041310&scope=bot&permissions=2146958847) | '
       )
         .setFooter(config.footer)
         .setTimestamp()

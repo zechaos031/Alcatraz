@@ -21,7 +21,7 @@ const { oneLine, stripIndent } = require('common-tags');
 const ror = require("@spyte-corp/discord.js-remove-on-reaction");
 const config = require('../../../config.json');
 
-module.exports = class HmidriffCommand extends Command {
+module.exports = class HelpCommand extends Command {
   constructor(client) {
     super(client, {
       name: 'hmidriff',

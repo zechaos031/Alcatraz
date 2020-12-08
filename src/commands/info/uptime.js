@@ -36,7 +36,7 @@ module.exports = class UptimeCommand extends Command {
     const seconds = (d.seconds() == 1) ? `${d.seconds()} seconde` : `${d.seconds()} secondes`;
     const date = moment().subtract(d, 'ms').format('DD/MM/YYYY');
     const embed = new MessageEmbed()
-    .setTitle(`Temps de disponibilité de ${config.NomBot}`)
+    .setTitle('Temps de disponibilité de d\'Alcatraz')
     .setThumbnail(message.guild.iconURL({ dynamic: true }))
     .setDescription(`\`${days}\`, \`${hours}\`, \`${minutes}\`, et \`${seconds}\``)
     .addField('Date de la dernière mise à jour', date) 

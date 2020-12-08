@@ -30,7 +30,7 @@ module.exports = class PrefixCommand extends Command {
   run(message) {
     const prefix = message.client.db.settings.selectPrefix.pluck().get(message.guild.id);
     const embed = new MessageEmbed()
-      .setTitle(`Préfix ${config.NomBot}`)
+      .setTitle('Préfix d\'Alcatraz')
       .setThumbnail(message.guild.iconURL({ dynamic: true }))
       .addField('Préfix', `\`${prefix}\``, true)
       .addField('Exemple', `\`${prefix}help\``, true)

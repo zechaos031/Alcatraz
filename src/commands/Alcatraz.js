@@ -1,19 +1,18 @@
-//  ______   __                      __                                  
-// /      \ |  \                    |  \                                 
-//|  $$$$$$\| $$  _______  ______  _| $$_     ______   ______   ________ 
+//  ______   __                      __
+// /      \ |  \                    |  \
+//|  $$$$$$\| $$  _______  ______  _| $$_     ______   ______   ________
 //| $$__| $$| $$ /       \|      \|   $$ \   /      \ |      \ |        \
 //| $$    $$| $$|  $$$$$$$ \$$$$$$\\$$$$$$  |  $$$$$$\ \$$$$$$\ \$$$$$$$$
-//| $$$$$$$$| $$| $$      /      $$ | $$ __ | $$   \$$/      $$  /    $$ 
-//| $$  | $$| $$| $$_____|  $$$$$$$ | $$|  \| $$     |  $$$$$$$ /  $$$$_ 
+//| $$$$$$$$| $$| $$      /      $$ | $$ __ | $$   \$$/      $$  /    $$
+//| $$  | $$| $$| $$_____|  $$$$$$$ | $$|  \| $$     |  $$$$$$$ /  $$$$_
 //| $$  | $$| $$ \$$     \\$$    $$  \$$  $$| $$      \$$    $$|  $$    \
 // \$$   \$$ \$$  \$$$$$$$ \$$$$$$$   \$$$$  \$$       \$$$$$$$ \$$$$$$$$
-//=======================================================================                                                                      
+//=======================================================================
 //● Crée par GalackQSM#0895 le 09 novembre 2020
 //● Serveur Discord: https://discord.gg/HPtTfqDdMr
-//● Github: https://github.com/GalackQSM/Alcatraz                                                      
-//=======================================================================  
+//● Github: https://github.com/GalackQSM/Alcatraz
+//=======================================================================
 
-const config = require('../../config.json');
 const { MessageEmbed } = require('discord.js');
 const permissions = require('../utils/permissions.json');
 const { fail } = require('../utils/emojis.json');
@@ -76,7 +75,7 @@ class Command {
     if (this.ownerOnly && !this.client.isOwner(message.author)) {
       return false;
     }
-    
+
     if (message.member.hasPermission('ADMINISTRATOR')) return true;
     if (this.userPermissions) {
       const missingPermissions =
@@ -86,7 +85,6 @@ class Command {
           .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL({ dynamic: true }))
           .setTitle(`${fail} Autorisations utilisateur manquantes: \`${this.name}\``)
           .setDescription(`\`\`\`diff\n${missingPermissions.map(p => `- ${p}`).join('\n')}\`\`\``)
-          .setFooter(config.footer)
           .setTimestamp()
           .setColor("#2f3136");
         message.channel.send(embed);
@@ -104,7 +102,6 @@ class Command {
         .setAuthor(`${this.client.user.tag}`, message.client.user.displayAvatarURL({ dynamic: true }))
         .setTitle(`${fail} Permissions de bot manquantes: \`${this.name}\``)
         .setDescription(`\`\`\`diff\n${missingPermissions.map(p => `- ${p}`).join('\n')}\`\`\``)
-        .setFooter(config.footer)
         .setTimestamp()
         .setColor("#2f3136");
       message.channel.send(embed);
@@ -112,7 +109,7 @@ class Command {
 
     } else return true;
   }
-  
+
   sendErrorMessage(message, errorType, reason, errorMessage = null) {
     errorType = this.errorTypes[errorType];
     const prefix = message.client.db.settings.selectPrefix.pluck().get(message.guild.id);
@@ -121,7 +118,6 @@ class Command {
       .setTitle(`${fail} Erreur de commande: \`${this.name}\``)
       .setDescription(`\`\`\`diff\n- ${errorType}\n+ ${reason}\`\`\``)
       .addField('Usage', `\`${prefix}${this.usage}\``)
-      .setFooter(config.footer)
       .setTimestamp()
       .setColor("#2f3136");
     if (this.examples) embed.addField('Exemples', this.examples.map(e => `\`${prefix}${e}\``).join('\n'));
@@ -132,7 +128,7 @@ async sendModLogMessage(message, reason, fields = {}) {
     const modLogId = message.client.db.settings.selectModLogId.pluck().get(message.guild.id);
     const modLog = message.guild.channels.cache.get(modLogId);
     if (
-      modLog && 
+      modLog &&
       modLog.viewable &&
       modLog.permissionsFor(message.guild.me).has(['SEND_MESSAGES', 'EMBED_LINKS'])
     ) {
@@ -173,17 +169,17 @@ async sendModLogMessage(message, reason, fields = {}) {
 
     if (options.usage && typeof options.usage !== 'string') throw new TypeError('L\'utilisation de la commande n\'est pas une chaîne');
 
-    if (options.description && typeof options.description !== 'string') 
+    if (options.description && typeof options.description !== 'string')
       throw new TypeError('La description de la commande n\'est pas une chaîne');
-    
+
     if (options.type && typeof options.type !== 'string') throw new TypeError('Le type de commande n\'est pas une chaîne');
     if (options.type && !Object.values(client.types).includes(options.type))
       throw new Error('Le type de commande n\'est pas valide');
-    
+
     if (options.clientPermissions) {
       if (!Array.isArray(options.clientPermissions))
         throw new TypeError('La commande clientPermissions n\'est pas un tableau de chaînes de clés d\'autorisation');
-      
+
       for (const perm of options.clientPermissions) {
         if (!permissions[perm]) throw new RangeError(`ClientPermission de commande non valide: ${perm}`);
       }
@@ -201,10 +197,10 @@ async sendModLogMessage(message, reason, fields = {}) {
     if (options.examples && !Array.isArray(options.examples))
       throw new TypeError('Les exemples de commande ne sont pas un tableau de chaînes de clé d\'autorisation');
 
-    if (options.ownerOnly && typeof options.ownerOnly !== 'boolean') 
+    if (options.ownerOnly && typeof options.ownerOnly !== 'boolean')
       throw new TypeError('La commande ownerOnly n\'est pas une valeur booléenne');
 
-    if (options.disabled && typeof options.disabled !== 'boolean') 
+    if (options.disabled && typeof options.disabled !== 'boolean')
       throw new TypeError('La commande désactivée n\'est pas un booléen');
   }
 }

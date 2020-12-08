@@ -33,7 +33,7 @@ module.exports = class InviteMoiCommand extends Command {
       .setTitle('Je serais ravi d\'être sur ton serveur !')
       .setThumbnail(message.guild.iconURL())
       .setDescription(oneLine`
-        [Ajouter ${config.NomBot}](https://discordapp.com/oauth2/authorize?client_id=${config.BotID}&scope=bot&permissions=2146958847) pour m'inviter sur ton serveur !`)
+        [Ajouter Alcatraz](https://discordapp.com/oauth2/authorize?client_id=774652242787041310&scope=bot&permissions=2146958847) pour m'inviter sur ton serveur !`)
       .setFooter(config.footer)
       .setTimestamp()
       .setColor("#2f3136");

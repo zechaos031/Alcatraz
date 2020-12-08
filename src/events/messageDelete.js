@@ -1,35 +1,35 @@
-//  ______   __                      __                                  
-// /      \ |  \                    |  \                                 
-//|  $$$$$$\| $$  _______  ______  _| $$_     ______   ______   ________ 
+//  ______   __                      __
+// /      \ |  \                    |  \
+//|  $$$$$$\| $$  _______  ______  _| $$_     ______   ______   ________
 //| $$__| $$| $$ /       \|      \|   $$ \   /      \ |      \ |        \
 //| $$    $$| $$|  $$$$$$$ \$$$$$$\\$$$$$$  |  $$$$$$\ \$$$$$$\ \$$$$$$$$
-//| $$$$$$$$| $$| $$      /      $$ | $$ __ | $$   \$$/      $$  /    $$ 
-//| $$  | $$| $$| $$_____|  $$$$$$$ | $$|  \| $$     |  $$$$$$$ /  $$$$_ 
+//| $$$$$$$$| $$| $$      /      $$ | $$ __ | $$   \$$/      $$  /    $$
+//| $$  | $$| $$| $$_____|  $$$$$$$ | $$|  \| $$     |  $$$$$$$ /  $$$$_
 //| $$  | $$| $$ \$$     \\$$    $$  \$$  $$| $$      \$$    $$|  $$    \
 // \$$   \$$ \$$  \$$$$$$$ \$$$$$$$   \$$$$  \$$       \$$$$$$$ \$$$$$$$$
-//=======================================================================                                                                      
+//=======================================================================
 //● Crée par GalackQSM#0895 le 09 novembre 2020
 //● Serveur Discord: https://discord.gg/HPtTfqDdMr
-//● Github: https://github.com/GalackQSM/Alcatraz                                                  
-//=======================================================================                                                                      
-                                                                       
+//● Github: https://github.com/GalackQSM/Alcatraz
+//=======================================================================
+
 const { MessageEmbed } = require('discord.js');
 
 module.exports = (client, message) => {
-  
+
   if (message.webhookID || (!message.content && message.embeds.length === 0)) return;
-  
+
   const embed = new MessageEmbed()
     .setTitle('Mise à jour du message: `Supprimer`')
     .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL({ dynamic: true }))
     .setTimestamp()
     .setColor(message.guild.me.displayHexColor);
-  
+
   if (message.content) {
 
     const starboardChannelId = client.db.settings.selectStarboardChannelId.pluck().get(message.guild.id);
     const starboardChannel = message.guild.channels.cache.get(starboardChannelId);
-    if (message.channel == starboardChannel) return;
+    if (message.channel === starboardChannel) return;
 
     const messageDeleteLogId = client.db.settings.selectMessageDeleteLogId.pluck().get(message.guild.id);
     const messageDeleteLog = message.guild.channels.cache.get(messageDeleteLogId);
@@ -44,11 +44,11 @@ module.exports = (client, message) => {
       embed
         .setDescription(`${message.member}'s **message** dans ${message.channel} a été supprimée.`)
         .addField('Message', message.content);
-        
+
       messageDeleteLog.send(embed);
     }
 
-  } else { 
+  } else {
 
     const messageDeleteLogId = client.db.settings.selectMessageDeleteLogId.pluck().get(message.guild.id);
     const messageDeleteLog = message.guild.channels.cache.get(messageDeleteLogId);
@@ -64,5 +64,5 @@ module.exports = (client, message) => {
       messageDeleteLog.send(embed);
     }
   }
-  
+
 };

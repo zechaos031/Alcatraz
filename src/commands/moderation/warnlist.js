@@ -14,7 +14,7 @@
 //=======================================================================                                                                      
 
 const Command = require('../Alcatraz.js');
-const MenuReac = require('../../../MenuReac.js');
+const ReactionMenu = require('../ReactionMenu.js');
 const { MessageEmbed } = require('discord.js');
 const config = require('../../../config.json');
 
@@ -116,7 +116,7 @@ module.exports = class WarnsCommand extends Command {
         '⏹️': null,
       };
 
-      const menu = new MenuReac(
+      const menu = new ReactionMenu(
         message.client,
         message.channel, 
         message.member, 

@@ -15,7 +15,6 @@
 
 const Command = require('../Alcatraz.js');
 const { MessageEmbed } = require('discord.js');
-const config = require('../../../config.json');
 
 module.exports = class WipePointsCommand extends Command {
   constructor(client) {
@@ -36,7 +35,7 @@ module.exports = class WipePointsCommand extends Command {
     const embed = new MessageEmbed()
       .setTitle('J\'ai bien effacé tous les points du membre')
       .setDescription(`Les points de ${member} ont bien été effacés.`)
-      .setFooter(config.footer)
+      .setFooter("© 2020 - Alcatraz | Projet open-source")
       .setTimestamp()
       .setColor("#2f3136");
     message.channel.send(embed);
